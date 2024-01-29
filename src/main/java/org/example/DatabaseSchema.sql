@@ -1,5 +1,5 @@
 --create table for accommodation
-CREATE TABLE accommodation
+CREATE TABLE IF NOT EXISTS accommodation
 (
     id          SERIAL PRIMARY KEY,
     type        VARCHAR(32),
@@ -9,7 +9,7 @@ CREATE TABLE accommodation
 );
 
 --create table for room_fair
-CREATE TABLE room_fair
+CREATE TABLE IF NOT EXISTS room_fair
 (
     id     SERIAL PRIMARY KEY,
     value  DOUBLE PRECISION,
@@ -17,7 +17,7 @@ CREATE TABLE room_fair
 );
 
 --create relation table for room-fair and accommodation table
-CREATE TABLE accommodation_room_fair_relation
+CREATE TABLE IF NOT EXISTS accommodation_room_fair_relation
 (
     id               SERIAL PRIMARY KEY,
     accommodation_id INT,
@@ -28,10 +28,10 @@ CREATE TABLE accommodation_room_fair_relation
 
 --insert data into accommodation table
 INSERT INTO accommodation (type, bed_type, max_guests, description)
-VALUES (''Hotel Room'', ''Queen'', 2, ''Cozy room with a view''),
-       (''Apartment'', ''King'', 4, ''Spacious apartment in the middle of the city'');
+VALUES ('Hotel Room', 'Queen', 2, 'Cozy room with a view'),
+       ('Apartment', 'King', 4, 'Spacious apartment in the middle of the city');
 
 -- Insert data into room_fair
 INSERT INTO room_fair (value, season)
-VALUES (100.00, ''Summer''),
-       (120.00, ''Winter'');
+VALUES (100.00, 'Summer'),
+       (120.00, 'Winter');

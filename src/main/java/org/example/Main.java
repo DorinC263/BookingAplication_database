@@ -1,4 +1,5 @@
 package org.example;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,6 +17,17 @@ public class Main {
         try (Connection connection = DriverManager.getConnection(url, props);
              Statement statement = connection.createStatement()) {
             System.out.println("Connection to the database completed");
+
+            // Execute query to retrieve room prices
+            try (ResultSet roomFairResultSet = statement.executeQuery("SELECT * FROM room_fair")) {
+                while (roomFairResultSet.next()) {
+                    double value = roomFairResultSet.getDouble("value");
+                    String season = roomFairResultSet.getString("season");
+                    System.out.println("Price: " + value + ", Season: " + season);
+                }
+            }
+
+            // Execute query to retrieve accommodation details
             try (ResultSet resultSet = statement.executeQuery("SELECT * FROM accommodation")) {
                 while (resultSet.next()) {
                     int id = resultSet.getInt("id");
